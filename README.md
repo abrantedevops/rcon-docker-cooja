@@ -35,7 +35,7 @@ $ git clone https://github.com/abrantedevops/rcon-docker-cooja
 $ cd rcon-docker-cooja
 $ git submodule update --init --recursive
 $ Dê o comando pwd no terminal e anote a saída, por exemplo: /home/thiago/rcon-docker-cooja
-$ export CNG_PATH=/home/abrantedevops/Workspaces/rcon-docker-cooja
+$ export CNG_PATH=/home/thiago/rcon-docker-cooja
 $ alias contiker="sudo docker run --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 --mount type=bind,source=$CNG_PATH,destination=/home/user/contiki-ng -e DISPLAY=$DISPLAY -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) -v /tmp/.X11-unix:/tmp/.X11-unix -v /dev/bus/usb:/dev/bus/usb -p 80:80 -ti --name coojasim contiker/contiki-ng"
 $ contiker cooja
 ```
@@ -108,6 +108,41 @@ $ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/tools/mosquitto.rsmb/rsmb/src ; mo
 <p align="center">
   <img src="img/2.png" alt="Tela inicial do Cooja">
 </p>
+
+<p align="justify">Para acessar informações sobre a tabela de roteamento e os dispositivos vizinhos do roteador de borda RPL, é necessário ter o ipv6 do tunelamento obtido anteriomente, tal como na imagem abaixo:</p>
+
+<p align="center">
+  <img src="img/3.png" alt="Ipv6 roteador de borda">
+</p>
+
+<p align="justify">Com o ipv6 do tunelamento e a simulação em execução:</p>
+
+```bash
+Entre no container do Cooja:
+$ sudo docker exec -it coojasim bash 
+$ apt install curl -y
+$ curl -v http://[aaaa::c30c:0:0:1]
+```
+
+<p align="justify">Nesse momento será exibido as informações sobre a tabela de roteamento e os dispositivos vizinhos do roteador de borda RPL a partir do terminal do container do Cooja. Porém, para poder visualizar essas informações no terminal do host, ou seja, fora do container do Cooja, é necessário realizar o seguinte procedimento:</p>
+
+```bash
+$ sudo docker exec -it coojasim bash
+$ apt install openssh-server -y
+$ service ssh start
+$ passwd user (Defina uma senha para o usuário user)
+# Veja o ip do container Cooja através do comando: hostname -I (Aqui o ip foi: 172.17.0.2)
+# Saia do container e no terminal do host execute:
+ssh -L 8080:[aaaa::c30c:0:0:1]:80 -N -f -l user 172.17.0.2
+# Informe a senha definida anteriormente
+```
+
+<p align="justify">Dessa forma, quando acessamos o endereço http://localhost:8080 no navegador do host, é possível visualizar a tabela de roteamento e os dispositivos vizinhos do roteador de borda RPL. A imagem abaixo ilustra o resultado:</p>
+
+<p align="center">
+  <img src="img/4.png" alt="Ipv6 roteador de borda">
+</p>
+<p align="center">A simulação deve estar em andamento para que as informações sejam exibidas.</p>
 
 <hr>
 
