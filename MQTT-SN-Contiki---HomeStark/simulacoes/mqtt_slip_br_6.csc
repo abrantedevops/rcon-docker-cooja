@@ -25,7 +25,7 @@
       org.contikios.cooja.mspmote.Z1MoteType
       <identifier>z11</identifier>
       <description>border_router</description>
-      <firmware EXPORT="copy">/home/user/rcon-docker-cooja/MQTT-SN-Contiki---HomeStark/tools/border-router.z1</firmware>
+      <firmware EXPORT="copy">/home/user/contiki-ng/MQTT-SN-Contiki---HomeStark/tools/border-router.z1</firmware>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.RimeAddress</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.IPAddress</moteinterface>
@@ -43,7 +43,7 @@
       org.contikios.cooja.mspmote.Z1MoteType
       <identifier>z12</identifier>
       <description>node_mqtt_sn</description>
-      <firmware EXPORT="copy">/home/user/rcon-docker-cooja/MQTT-SN-Contiki---HomeStark/main_core.z1</firmware>
+      <firmware EXPORT="copy">/home/user/contiki-ng/MQTT-SN-Contiki---HomeStark/main_core.z1</firmware>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.RimeAddress</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.IPAddress</moteinterface>

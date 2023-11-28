@@ -24,7 +24,7 @@
       org.contikios.cooja.contikimote.ContikiMoteType
       <identifier>mtype241</identifier>
       <description>RPL BR</description>
-      <source>/home/user/rcon-docker-cooja/Smtw/rpl-border-router/border-router.c</source>
+      <source>/home/user/contiki-ng/Smtw/rpl-border-router/border-router.c</source>
       <commands>make border-router.cooja TARGET=cooja</commands>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.Battery</moteinterface>
@@ -49,7 +49,7 @@
       org.contikios.cooja.contikimote.ContikiMoteType
       <identifier>mtype634</identifier>
       <description>Gym AC</description>
-      <source>/home/user/rcon-docker-cooja/Smtw/CoAP-network/air-conditioning/ac_CoAP_server.c</source>
+      <source>/home/user/contiki-ng/Smtw/CoAP-network/air-conditioning/ac_CoAP_server.c</source>
       <commands>make ac_CoAP_server.cooja TARGET=cooja</commands>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.Battery</moteinterface>
@@ -74,7 +74,7 @@
       org.contikios.cooja.contikimote.ContikiMoteType
       <identifier>mtype942</identifier>
       <description>Gym Light</description>
-      <source>/home/user/rcon-docker-cooja/Smtw/CoAP-network/light-regulation/light-regulation_CoAP-server.c</source>
+      <source>/home/user/contiki-ng/Smtw/CoAP-network/light-regulation/light-regulation_CoAP-server.c</source>
       <commands>make light-regulation_CoAP-server.cooja TARGET=cooja</commands>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.Battery</moteinterface>
@@ -99,7 +99,7 @@
       org.contikios.cooja.contikimote.ContikiMoteType
       <identifier>mtype25</identifier>
       <description>SB Humidity</description>
-      <source>/home/user/rcon-docker-cooja/Smtw/MQTT-network/humidifier/humidifier.c</source>
+      <source>/home/user/contiki-ng/Smtw/MQTT-network/humidifier/humidifier.c</source>
       <commands>make humidifier.cooja TARGET=cooja</commands>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.Battery</moteinterface>
@@ -124,7 +124,7 @@
       org.contikios.cooja.contikimote.ContikiMoteType
       <identifier>mtype274</identifier>
       <description>SB Access</description>
-      <source>/home/user/rcon-docker-cooja/Smtw/MQTT-network/access/access-control.c</source>
+      <source>/home/user/contiki-ng/Smtw/MQTT-network/access/access-control.c</source>
       <commands>make access-control.cooja TARGET=cooja</commands>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.Battery</moteinterface>
@@ -149,7 +149,7 @@
       org.contikios.cooja.contikimote.ContikiMoteType
       <identifier>mtype18</identifier>
       <description>Pool pH</description>
-      <source>/home/user/rcon-docker-cooja/Smtw/CoAP-network/water-quality/water_quality_CoAP_server.c</source>
+      <source>/home/user/contiki-ng/Smtw/CoAP-network/water-quality/water_quality_CoAP_server.c</source>
       <commands>make water_quality_CoAP_server.cooja TARGET=cooja</commands>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.Battery</moteinterface>
@@ -174,7 +174,7 @@
       org.contikios.cooja.contikimote.ContikiMoteType
       <identifier>mtype411</identifier>
       <description>Pool Chlorine</description>
-      <source>/home/user/rcon-docker-cooja/Smtw/MQTT-network/chlorine/chlorine-control.c</source>
+      <source>/home/user/contiki-ng/Smtw/MQTT-network/chlorine/chlorine-control.c</source>
       <commands>make chlorine-control.cooja TARGET=cooja</commands>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.Battery</moteinterface>
