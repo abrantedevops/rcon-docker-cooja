@@ -5,15 +5,15 @@
   <a href="#-como-executar-o-projeto">Requisitos</a> •
   <a href="#-prov">Cooja Simulator</a> •
   <a href="#-tecnologias">Cenários Estudados</a> •
-  <a href="#-ref">Referências</a> •
-  <a href="#-autor">Autor</a>
+  <!-- <a href="#-ref">Referências</a> •
+  <a href="#-autor">Autor</a> -->
 </p>
 <hr>
-<h3 id="-sobre-o-projeto">Sobre o projeto</h3>
+<h2 id="-sobre-o-projeto">Sobre o projeto</h2>
 
 <p align="justify">Este projeto tem como objetivo a utilização do Docker para o provisionamento do simulador Cooja no Contiki-NG. O Contiki-NG é um sistema operacional de código aberto para a Internet das Coisas. O Contiki-NG é uma continuação do Contiki OS, um sistema operacional de código aberto para redes de sensores sem fio, sendo desenvolvido por uma equipe mundial de desenvolvedores independentes, com o apoio de empresas como a Atmel, Cisco, Texas Instruments, Zolertia, etc.</p>
 
-<h3 id="-como-executar-o-projeto">Requisitos</h3>
+<h2 id="-como-executar-o-projeto">Requisitos</h2>
 
 <p align="justify">
 
@@ -22,10 +22,11 @@
 
 ```bash
 $ git clone https://github.com/abrantedevops/rcon-docker-cooja
+$ cd rcon-docker-cooja
 $ chmod +x install_docker.sh && ./install_docker.sh
 ```
 
-<h3 id="-prov">Cooja Simulator</h3>
+<h2 id="-prov">Cooja Simulator</h2>
 
 <p align="justify">Para a utilização do Cooja Simulator através do Docker realize os seguintes passos:</p>
 
@@ -47,9 +48,10 @@ $ contiker cooja
 
 <hr>
 
-<h3 id="-tecnologias">Cenários Estudados</h3>
+<h2 id="-tecnologias">Cenários Estudados</h2>
 
-<h4>Simulação 1: Funcionamento de uma Rede RPL com o protocolo MQTT-SN.</h4>
+<h3>Simulação 1: Funcionamento de uma Rede RPL com o protocolo MQTT-SN.</h3>
+
 <p align="justify">Nesta simulação foi utilizado o protocolo MQTT-SN para a comunicação de uma rede RPL entre oito nós. O cenário é caracterizado por conter oito nós, sendo um deles o roteador de borda RPL e os outros sete nós responsáveis pelo envio de dados. Ao receber os dados, o roteador de borda RPL envia-os para o broker MQTT-SN, que por sua vez encaminha para o cliente MQTT-SN que esta inscrito no tópico de interesse</p>
 
 <p align="justify">Para esta simulação, realize os seguintes passos:</p>
@@ -100,8 +102,13 @@ $ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/tools/mosquitto.rsmb/rsmb/src ; mo
 ```
 
 <br>
-<p align="justify"> Nesse momento, observe que no quadro "Network" o roteador de bordar recebeu um prefixo IP para a conexão externa e os nós começaram a enviar os dados, ao mesmo tempo no Broker MQTT-SN é possível observar a conexão dos nós e o envio dos dados para o cliente MQTT-SN.</p>
+<p align="justify"> Nesse momento, observe que no quadro "Network" o roteador de bordar recebeu um prefixo IP para a conexão externa e os nós começaram a enviar os dados, ao mesmo tempo no Broker MQTT-SN é possível verificar a conexão dos nós e o envio dos dados para o cliente MQTT-SN.</p>
 
-<p align="justify">As imagens abaixo ilustram o passo a passo da simulação bem como o funcionamento da rede RPL com o protocolo MQTT-SN.</p>
+<p align="justify">A imagem abaixo ilustra o passo a passo bem como o funcionamento da rede RPL com o protocolo MQTT-SN.</p>
+<p align="center">
+  <img src="img/2.png" alt="Tela inicial do Cooja">
+</p>
 
+<hr>
 
+<!-- <h3>Simulação 2: Rede IoT com Banco de dados MYSQL e Grafana</h3> -->
