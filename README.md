@@ -11,7 +11,7 @@
 <hr>
 <h3 id="-sobre-o-projeto">Sobre o projeto</h3>
 
-<p align="justify">Este projeto tem como objetivo a utilização do Docker para o provisionamento do simulador Cooja no Contiki-NG. O Contiki-NG é um sistema operacional de código aberto para a Internet das Coisas. O Contiki-NG é uma continuação do Contiki OS, um sistema operacional de código aberto para redes de sensores sem fio, sendo desenvolvido por uma equipe mundial de desenvolvedores independentes, com o apoio de empresas como a Atmel, Cisco, Texas Instruments, Zolertia, etc. Para mais informações sobre o Contiki-NG, acesse o site oficial do projeto: https://www.contiki-ng.org/</p>
+<p align="justify">Este projeto tem como objetivo a utilização do Docker para o provisionamento do simulador Cooja no Contiki-NG. O Contiki-NG é um sistema operacional de código aberto para a Internet das Coisas. O Contiki-NG é uma continuação do Contiki OS, um sistema operacional de código aberto para redes de sensores sem fio, sendo desenvolvido por uma equipe mundial de desenvolvedores independentes, com o apoio de empresas como a Atmel, Cisco, Texas Instruments, Zolertia, etc.</p>
 
 <h3 id="-como-executar-o-projeto">Requisitos</h3>
 
@@ -59,7 +59,7 @@ $ contiker cooja
 I) Com o simulador aberto na tela inicial, abra o cenário em:<br>
 File > Open Simulation > Browser; <br> Na janela que abrir selecione a simulação "mqtt_slip_br6.csc" no caminho:<br> /home/user/contiki-ng/MQTT-SN-Contiki---HomeStark/simulacoes</p>
 
-II) Inicie a simulação em "Start/Pause" localizado no canto superior esquerdo da tela. Nesse momento observe que no quadro "Network" o roteador de bordar aguarda receber um prefixo IP para a conexão externa. 
+II) Inicie a simulação em "Start/Pause" localizado no canto superior esquerdo da tela. Nesse momento note que no quadro "Mote Output" o roteador de bordar (nó 1) aguarda receber um prefixo IP para a conexão externa, enquanto os outros nós estão no estado MQTT CONNACK.
 
 III) Para efetivar a comunicação, abra três terminais e execute os seguintes comandos:
 
@@ -82,7 +82,7 @@ $ sudo docker exec -it coojasim bash
 $ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/tools/mosquitto.rsmb/rsmb/src ; mosquitto_sub -t "#" -v -i t1
 ```
 <br>
-IV) Os passos acima são necessários na primeira execução, nas próxima basta fazer:
+Obs.: Os comandos anteriores são necessários na primeira execução do simulador. Nas seguintes, basta executar os passos abaixo:
 <br><br>
 
 ```bash
@@ -99,7 +99,7 @@ $ sudo docker exec -it coojasim bash
 $ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/tools/mosquitto.rsmb/rsmb/src ; mosquitto_sub -t "#" -v -i t1
 ```
 
-
+<br>
 <p align="justify"> Nesse momento, observe que no quadro "Network" o roteador de bordar recebeu um prefixo IP para a conexão externa e os nós começaram a enviar os dados, ao mesmo tempo no Broker MQTT-SN é possível observar a conexão dos nós e o envio dos dados para o cliente MQTT-SN.</p>
 
 <p align="justify">As imagens abaixo ilustram o passo a passo da simulação bem como o funcionamento da rede RPL com o protocolo MQTT-SN.</p>
