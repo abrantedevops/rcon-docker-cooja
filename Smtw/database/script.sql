@@ -1,0 +1,12 @@
+DELIMITER //
+
+CREATE TRIGGER update_timestamp
+BEFORE INSERT ON DataSamples
+FOR EACH ROW
+BEGIN
+    IF NEW.timestamp IS NULL THEN
+        SET NEW.timestamp = CURRENT_TIMESTAMP;
+    END IF;
+END; //
+
+DELIMITER ;
