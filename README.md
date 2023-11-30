@@ -22,14 +22,14 @@
 
 <h2 id="-prov">Cooja Simulator</h2>
 
-<p align="justify">Diferente da simulação que envolve o cenário do MQTT-SN (<>), aqui o Cooja é iniciado diretamente no host.</p>
+<p align="justify">Diferente da simulação que envolve o cenário do MQTT-SN (Branch develop), aqui o Cooja é iniciado diretamente no host.</p>
 
 <p align="justify">Instale as dependências abaixo e execute os comandos a seguir:</p>
 
 ```bash
 $ sudo apt update -y ; sudo apt install make gcc mosquitto ant maven -y
-$ git clone https://github.com/abrantedevops/rcon-docker-cooja(<>)
-$ cd rcon-docker-cooja/tools/cooja ; sudo ant run
+$ git clone -b IoT_proj https://github.com/abrantedevops/rcon-docker-cooja.git
+$ cd rcon-docker-cooja ; git submodule update --init --recursive ; cd tools/cooja/ ; sudo ant run
 ```
 
 <p align="justify">Após a compilação, o container será iniciado e a tela inicial do Cooja será aberta. </p> 
