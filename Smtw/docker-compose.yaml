@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: PASSWORD
+      MYSQL_DATABASE: smartwellness 
+      MYSQL_USER: grafana 
+      MYSQL_PASSWORD: PWORD 
+    ports:
+      - "3306:3306" 
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    pull_policy: always
+    environment:
+      - GF_DATABASE_TYPE=mysql
+      - GF_DATABASE_HOST=mysql
+      - GF_DATABASE_NAME=smartwellness
+      - GF_DATABASE_USER=grafana
+      - GF_DATABASE_PASSWORD=PWORD
+    ports:
+      - "3000:3000"
+
+volumes:
+  mysql_data:
+    driver: local
