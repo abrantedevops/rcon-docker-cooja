@@ -30,7 +30,7 @@ $ chmod +x install_docker.sh && ./install_docker.sh
 <p align="justify">Instale as dependências abaixo juntamente com os comandos. Após a compilação, a tela padrão do Cooja será aberta.</p>
 
 ```bash
-$ sudo apt update -y ; sudo apt install make gcc mosquitto ant maven default-jre default-jdk -y
+$ sudo apt update -y ; sudo apt install make gcc mosquitto ant maven default-jre default-jdk gcc-arm-none-eabi rlwrap net-tools -y
 $ git clone -b IoT_proj https://github.com/abrantedevops/rcon-docker-cooja.git
 $ cd ~/rcon-docker-cooja ; git submodule update --init --recursive ; cd tools/cooja/ ; sudo ant run
 ```
