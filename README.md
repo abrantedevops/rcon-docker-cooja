@@ -5,8 +5,6 @@
   <a href="#-como-executar-o-projeto">Requisitos Gerais</a> •
   <a href="#-prov">Cooja Simulator</a> •
   <a href="#-tecnologias">Cenários Estudados</a> •
-  <!-- <a href="#-ref">Referências</a> •
-  <a href="#-autor">Autor</a> -->
 </p>
 <hr>
 <h2 id="-sobre-o-projeto">Sobre o projeto</h2>
@@ -18,66 +16,39 @@
 <p align="justify">
 
 - Toda a implementação foi realizada na distribuição Ubuntu 20.04. LTS Focal Fossa;
-- Ter o Docker instalado, para isso execute o script install_docker.sh</p>
+- Ter o Docker instalado para os serviços do MySQL e Grafana, para isso execute o script install_docker.sh</p>
+
+```bash
+$ chmod +x install_docker.sh && ./install_docker.sh
+```
+
 
 <h2 id="-prov">Cooja Simulator</h2>
 
-<p align="justify">Diferente da simulação que envolve o cenário do MQTT-SN (Branch develop), aqui o Cooja é iniciado diretamente no host.</p>
+<p align="justify">Diferente da simulação que envolve o cenário do MQTT-SN (Disponível na Branch develop deste repositório), aqui o Cooja é iniciado diretamente no host.</p>
 
-<p align="justify">Instale as dependências abaixo e execute os comandos a seguir:</p>
+<p align="justify">Instale as dependências abaixo juntamente com os comandos. Após a compilação, a tela padrão do Cooja será aberta.</p>
 
 ```bash
-$ sudo apt update -y ; sudo apt install make gcc mosquitto ant maven -y
+$ sudo apt update -y ; sudo apt install make gcc mosquitto ant maven default-jre default-jdk -y
 $ git clone -b IoT_proj https://github.com/abrantedevops/rcon-docker-cooja.git
-$ cd rcon-docker-cooja ; git submodule update --init --recursive ; cd tools/cooja/ ; sudo ant run
+$ cd ~/rcon-docker-cooja ; git submodule update --init --recursive ; cd tools/cooja/ ; sudo ant run
 ```
-
-<p align="justify">Após a compilação, o container será iniciado e a tela inicial do Cooja será aberta. </p> 
 
 <h2 id="-tecnologias">Cenários Estudados</h2>
-<p align="justify">Abra mais três terminais e execute os seguintes passos:</p>
+
+<h3>Simulação 1: Funcionamento de uma Rede RPL com o protocolo MQTT-SN.</h3>
+
+<p align="justify">Confira todos os passos para a execução da simulação no arquivo README.md da Branch develop deste repositório.</p>
+
+<h3>Simulação 2: Rede IoT com banco de dados MySQL e Grafana</h3>
+
+<p align="justify">A ideia geral desta prática consiste na integração do Cooja com o Docker através da simulação de uma rede de dispositivos IoT projetada para coletar dados do ambiente físico através da utilização de sensores e atuadores. Na sequência através do Docker Compose é instanciado um banco de dados MySQL e o Grafana configurados para armazenar e exibir os dados registrados na simulação por meio de um dashboard. A metade dos dispositivos na rede usa o protocolo CoAP para expor seus recursos, enquanto a outra metade utiliza o protocolo MQTT. Para mais detalhes: https://github.com/federicominniti/SmartWellness </p>
+
+<p>I) Configuração do MySQL</p>
 
 ```bash
-Terminal 1:
-
-$ mosquitto -v
-
-Terminal 2: 
-$ cd /rcon-docker-cooja/Smtw/SmartWellnessCollector ; mvn clean install
-cd target ; java -jar SmartWellnessCollector-1.0-SNAPSHOT.jar
-
-```
-
-<p align="justify">Importe o cenário em:<br> File > Open Simulation > Open and Reconfigure > Browser; <br> Na janela que abrir selecione a simulação "SmartWellness.csc" no caminho:<br> /rcon-docker-cooja/Smtw/cooja. Inicie a simulação em "Start" localizado no quadro "Simulation control".</p>
-
-
-```bash
-Terminal 3:
-
-$ cd /rcon-docker-cooja/Smtw/rpl-border-router
-make TARGET=zoul connect-router-cooja
-
-```
-
-<p align="justify">Importe o cenário em:<br> File > Open Simulation > Open and Reconfigure > Browser; <br> Na janela que abrir selecione a simulação "SmartWellness.csc" no caminho:<br> /rcon-docker-cooja/Smtw/cooja. Inicie a simulação em "Start" localizado no quadro "Simulation control".</p>
-
-
-<p align="justify">Importe o cenário em:<br> File > Open Simulation > Open and Reconfigure > Browser; <br> Na janela que abrir selecione a simulação "SmartWellness.csc" no caminho:<br> /rcon-docker-cooja/Smtw/cooja. Inicie a simulação em "Start" localizado no quadro "Simulation control".</p>
-
-
-
-<p align="center">
-  <img src="img/1.png" alt="Tela inicial do Cooja">
-</p>
-
-
-
-<!-- 
-```bash
-$ git clone https://github.com/abrantedevops/rcon-docker-cooja
-$ cd rcon-docker-cooja/Smtw
-$ sudo docker-compose up -d
-$ sudo docker exec -it mysql bash
+$ cd ~/rcon-docker-cooja/Smtw ; sudo docker-compose up -d ; sudo docker exec -it mysql bash
 $ mysql -u root -p smartwellness < /docker-entrypoint-initdb.d/smartwellness_db.sql
 $ enter password: PASSWORD
 $ mysql -u root -pPASSWORD
@@ -92,110 +63,62 @@ $ mysql -u root -pPASSWORD
 # Teste para acessar o db através do host
 # $ mysql -u grafana -h 127.0.0.1 -pPWORD
 ```
- -->
 
 
+<p align="justify">II) Abra mais dois terminais e execute os seguintes passos:</p>
 
-<hr>
+```bash
+Terminal 1: $ mosquitto -v
+Terminal 2: $ cd ~/rcon-docker-cooja/Smtw/SmartWellnessCollector ; mvn clean install ; cd target ; java -jar SmartWellnessCollector-1.0-SNAPSHOT.jar
+```
 
-
-
-<h2 id="-tecnologias">Cenários Estudados</h2>
-
-<h3>Simulação 1: Funcionamento de uma Rede RPL com o protocolo MQTT-SN.</h3>
-
-<p align="justify">Nesta simulação foi utilizado o protocolo MQTT-SN para a comunicação de uma rede RPL entre oito nós. O cenário é caracterizado por conter oito nós, sendo um deles o roteador de borda RPL e os outros sete nós responsáveis pelo envio de dados. Ao receber os dados, o roteador de borda RPL envia-os para o broker MQTT-SN, que por sua vez encaminha para o cliente MQTT-SN que esta inscrito no tópico de interesse</p>
-
-<p align="justify">Para esta simulação, realize os seguintes passos:</p>
+<p align="justify">III) Com o simulador aberto na tela inicial, abra o cenário em: File > Open Simulation > Open and Reconfigure > Browser. Na janela que abrir selecione a simulação "SmartWellness.csc" no ficheiro: ~/rcon-docker-cooja/Smtw/cooja. Nesse momento será carregado na tela uma janela específica para os nós de toda a simulação, mantenha a opção padrão "org.contikios.cooja.contikimote.ContikiMoteType" e prossiga. Em seguida uma tela de criação do nó é exibida na tela, em que o primeiro nó é o roteador de borda RPL cujo arquivo "border-router.c" precisa ser importado, para isso informe no campo do ficheiro o caminho: ~/rcon-docker-cooja/Smtw/rpl-border-router/border-router.c. Nesse momento clique em "Compile" e depois em "Create". Para todos os outros nós da simulação mantenha a opção padrão "org.contikios.cooja.contikimote.ContikiMoteType", informe o caminho do arquivo, compile e crie. Os caminhos dos arquivos a serem importados são:</p>
 
 <p align="justify"> 
 
-I) Com o simulador aberto na tela inicial, abra o cenário em:<br>
-File > Open Simulation > Browser; <br> Na janela que abrir selecione a simulação "mqtt_slip_br6.csc" no caminho:<br> /home/user/contiki-ng/MQTT-SN-Contiki---HomeStark/simulacoes</p>
+  - Nó 1: ~/rcon-docker-cooja/Smtw/rpl-border-router/border-router.c
+  - Nó 2: ~/rcon-docker-cooja/Smtw/CoAP-network/air-conditioning/ac_CoAP_server.c
+  - Nó 3: ~/rcon-docker-cooja/Smtw/CoAP-network/light-regulation/light-regulation_CoAP-server.c
+  - Nó 4: ~/rcon-docker-cooja/Smtw/MQTT-network/humidifier/humidifier.c
+  - Nó 5: ~/rcon-docker-cooja/Smtw/MQTT-network/access/access-control.c
+  - Nó 6: ~/rcon-docker-cooja/Smtw/CoAP-network/water-quality/water_quality_CoAP_server.c
+  - Nó 7: ~/rcon-docker-cooja/Smtw/MQTT-network/chlorine/chlorine-control.c
 
-II) Inicie a simulação em "Start/Pause" localizado no canto superior esquerdo da tela. Nesse momento note que no quadro "Mote Output" o roteador de bordar (nó 1) aguarda receber um prefixo IP para a conexão externa, enquanto os outros nós estão no estado MQTT CONNACK.
+</p>
 
-III) Para efetivar a comunicação, abra três terminais e execute os seguintes comandos:
-
-```bash
-No terminal 1 (Habilitar o Tunelamento):
-
-$ sudo docker exec -it coojasim bash
-$ cd ~/contiki-ng/tools/serial-io ; make
-$ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/scripts_aux ; echo -e '#!'"/bin/bash\nsudo $HOME/contiki-ng/tools/serial-io/tunslip6 -a 127.0.0.1 aaaa::1/64\n" > webserver_slip.sh ; chmod +x webserver_slip.sh ; ./webserver_slip.sh
-
-No Terminal 2 (Iniciar o Broker MQTT-SN): 
-
-$ sudo docker exec -it coojasim bash
-$ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/tools ; unzip mosquitto.rsmb.zip 
-$ cd mosquitto.rsmb/rsmb/src ; ./broker_mqtts config.mqtt
-
-No Terminal 3 (Iniciar o Cliente MQTT-SN):
-
-$ sudo docker exec -it coojasim bash
-$ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/tools/mosquitto.rsmb/rsmb/src ; mosquitto_sub -t "#" -v -i t1
-```
-<br>
-Obs.: Os comandos anteriores são necessários na primeira execução do simulador. Nas seguintes, basta executar os passos abaixo:
-<br><br>
+<p align="justify">IV) Inicie a simulação em "Start" localizado no quadro "Simulation control". e ative o tunelamento com o comando abaixo em um terceiro terminal</p>
 
 ```bash
-No terminal 1 (Habilitar o Tunelamento):
-$ sudo docker exec -it coojasim bash
-$ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/scripts_aux ; ./webserver_slip.sh
-
-No Terminal 2 (Iniciar o Broker MQTT-SN):
-$ sudo docker exec -it coojasim bash
-$ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/tools/mosquitto.rsmb/rsmb/src ; ./broker_mqtts config.mqtt
-
-No Terminal 3 (Iniciar o Cliente MQTT-SN):
-$ sudo docker exec -it coojasim bash
-$ cd ~/contiki-ng/MQTT-SN-Contiki---HomeStark/tools/mosquitto.rsmb/rsmb/src ; mosquitto_sub -t "#" -v -i t1
+Terminal 3: $ cd ~/rcon-docker-cooja/Smtw/rpl-border-router ; make TARGET=zoul connect-router-cooja
 ```
+
+<p align="justify">Aguarde a convergência dos endpoints e observe a dinâmica de eventos por cada um dos nós no simulador, nesse momento a coleta de informações está sendo realizada e o banco será populado com os valores dos sensores. Observe o comportamento do broker mosquitto (terminal 1) e do coletor (terminal 2).</p>
+
+
+<p>V) Configuração do Grafana</p>
+
+<p align="justify"> Acesse http://localhost:3000 com a credencial admin/admin e digite mysql no campo de busca e selecione o banco, em seguida na tela de configuração coloque as seguintes variáveis:</p>
+
+<p align="justify"> 
+
+- Host: ip_container_mysql:3306
+- Database name: smartwellness
+- Username: grafana
+- Password: PWORD
+- Marque Skip TLS Verification
+- Em seguida, clique em "Save & test".
+
+</p>
+
+<p align="justify">Agora com o banco conectado, basta importar um modelo de dashboard do grafana que está localizado em ~/rcon-docker-cooja/Smtw/grafana, na tela de opções determine um nome, e no UID user: -T1TqUenk e depois clique em "Import". Nesse momento irá abrir a tela geral do Dashboard com todos os gráficos, selecione o que desejar, e clique em editar. Na tela seguinte clique no botão "Run query" para que o grafana importe os valores do banco.</p>
 
 <br>
-<p align="justify"> Nesse momento, observe que no quadro "Network" o roteador de bordar recebeu um prefixo IP para a conexão externa e os nós começaram a enviar os dados, ao mesmo tempo no Broker MQTT-SN é possível verificar a conexão dos nós e o envio dos dados para o cliente MQTT-SN.</p>
-
-<p align="justify">A imagem abaixo ilustra o passo a passo bem como o funcionamento da rede RPL com o protocolo MQTT-SN.</p>
-<p align="center">
-  <img src="img/2.png" alt="Tela inicial do Cooja">
-</p>
-
-<p align="justify">Para acessar informações sobre a tabela de roteamento e os dispositivos vizinhos do roteador de borda RPL, é necessário ter o ipv6 do tunelamento obtido anteriomente, tal como na imagem abaixo:</p>
 
 <p align="center">
-  <img src="img/3.png" alt="Ipv6 roteador de borda">
+  <p align="center">Simulação 2 - Funcionamento da Rede IoT com banco de dados MySQL e Grafana</p>
+  <img src="img/fct-g.gif" alt="animated" />
 </p>
 
-<p align="justify">Com o ipv6 do tunelamento e a simulação em execução:</p>
+<br>
 
-```bash
-Entre no container do Cooja:
-$ sudo docker exec -it coojasim bash 
-$ apt install curl -y
-$ curl -v http://[aaaa::c30c:0:0:1]
-```
 
-<p align="justify">Nesse momento será exibido as informações sobre a tabela de roteamento e os dispositivos vizinhos do roteador de borda RPL a partir do terminal do container do Cooja. Porém, para poder visualizar essas informações no terminal do host, ou seja, fora do container do Cooja, é necessário realizar o seguinte procedimento:</p>
-
-```bash
-$ sudo docker exec -it coojasim bash
-$ apt install openssh-server -y
-$ service ssh start
-$ passwd user (Defina uma senha para o usuário user)
-# Veja o ip do container Cooja através do comando: hostname -I (Aqui o ip foi: 172.17.0.2)
-# Saia do container e no terminal do host execute:
-ssh -L 8080:[aaaa::c30c:0:0:1]:80 -N -f -l user 172.17.0.2
-# Informe a senha definida anteriormente
-```
-<!-- 
-<p align="justify">Dessa forma, quando acessamos o endereço http://localhost:8080 no navegador do host, é possível visualizar a tabela de roteamento e os dispositivos vizinhos do roteador de borda RPL. A imagem abaixo ilustra o resultado:</p> -->
-
-<!-- <p align="center">
-  <img src="img/4.png" alt="Ipv6 roteador de borda">
-</p>
-<p align="center">A simulação deve estar em andamento para que as informações sejam exibidas.</p> -->
-
-<hr>
-
-<!-- <h3>Simulação 2: Rede IoT com Banco de dados MYSQL e Grafana</h3> -->
