@@ -32,10 +32,12 @@ $ chmod +x install_docker.sh && ./install_docker.sh
 
 ```bash
 $ git clone https://github.com/abrantedevops/rcon-docker-cooja
+$ chmod 777 -R rcon-docker-cooja
 $ cd rcon-docker-cooja
 $ git submodule update --init --recursive
 $ Dê o comando pwd no terminal e anote a saída, por exemplo: /home/thiago/rcon-docker-cooja
 $ export CNG_PATH=/home/thiago/rcon-docker-cooja
+$ xhost +
 $ alias contiker="sudo docker run --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 --mount type=bind,source=$CNG_PATH,destination=/home/user/contiki-ng -e DISPLAY=$DISPLAY -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) -v /tmp/.X11-unix:/tmp/.X11-unix -v /dev/bus/usb:/dev/bus/usb -ti --name coojasim contiker/contiki-ng"
 $ contiker cooja
 ```
